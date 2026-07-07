@@ -28,7 +28,7 @@ export default function About() {
           </div>
           <div className="about__badge">
             <span className="about__badge-icon">✨</span>
-            <span>Premium WebGL Art</span>
+            <span>Interactive WebGL</span>
           </div>
           <div className="about__badge">
             <span className="about__badge-icon">📜</span>
