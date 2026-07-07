@@ -5,11 +5,10 @@ export default function About() {
         <p className="about__label">About This Project</p>
         <h2 className="about__title">A Demonstration of What Is Possible</h2>
         <p className="about__text">
-          This interactive experience was built as a portfolio concept for
-          {' '}<a href="https://awr.org" target="_blank" rel="noopener noreferrer">Adventist World Radio</a>.
-          It explores how modern web technology can serve the mission of sharing
-          Scripture with the world, not as a replacement for the Word itself,
-          but as a gateway that invites people to open it.
+          This interactive experience is an exploration of narrative web design.
+          It demonstrates how modern web technology can serve the purpose of sharing
+          ancient Scripture with a digital world, acting not as a replacement for the
+          Word itself, but as a visual gateway that invites deeper reflection.
         </p>
         <p className="about__text">
           The Old Testament is not a collection of disconnected ancient stories.
@@ -28,8 +27,8 @@ export default function About() {
             <span>Interactive 3D Scenes</span>
           </div>
           <div className="about__badge">
-            <span className="about__badge-icon">🌍</span>
-            <span>Built for AWR</span>
+            <span className="about__badge-icon">✨</span>
+            <span>Premium WebGL Art</span>
           </div>
           <div className="about__badge">
             <span className="about__badge-icon">📜</span>

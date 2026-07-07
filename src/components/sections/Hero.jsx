@@ -8,7 +8,7 @@ export default function Hero() {
 
       {/* Hero Foreground Content */}
       <div className="hero__content">
-        <p className="hero__eyebrow">A Portfolio for Adventist World Radio</p>
+        <p className="hero__eyebrow">An Interactive Exploration</p>
         <h1 className="hero__title">
           The Scarlet
           <span className="hero__title-accent">Thread</span>
