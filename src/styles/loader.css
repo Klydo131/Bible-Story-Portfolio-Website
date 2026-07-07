@@ -1,0 +1,92 @@
+/* ============================================================
+   LOADER STYLES
+   ============================================================ */
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-loader);
+  background: var(--color-void);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xl);
+  transition: opacity 0.8s var(--ease-dramatic), visibility 0.8s;
+}
+
+.loader--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader__symbol {
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.loader__cross {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader__cross-v {
+  width: 2px;
+  height: 40px;
+  background: var(--color-gold);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: pulse 1.5s var(--ease-smooth) infinite;
+}
+
+.loader__cross-h {
+  width: 24px;
+  height: 2px;
+  background: var(--color-gold);
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: pulse 1.5s var(--ease-smooth) 0.2s infinite;
+}
+
+.loader__text {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  color: var(--color-gold-dim);
+  letter-spacing: 0.15em;
+  font-style: italic;
+}
+
+.loader__progress {
+  width: 120px;
+  height: 2px;
+  background: rgba(212, 168, 67, 0.1);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.loader__progress-bar {
+  height: 100%;
+  background: var(--color-gold);
+  border-radius: 1px;
+  transition: width 0.3s var(--ease-smooth);
+}
+
+/* Radial glow behind the cross */
+.loader__glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.1) 0%, transparent 70%);
+  animation: pulse 2s var(--ease-smooth) infinite;
+}

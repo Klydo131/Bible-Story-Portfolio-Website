@@ -1,0 +1,362 @@
+/* ============================================================
+   THE SCARLET THREAD — Design System
+   Sacred Cosmos Aesthetic
+   ============================================================ */
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Primary Palette */
+  --color-void: #050d1a;
+  --color-deep-navy: #0a1628;
+  --color-royal-blue: #1a3a5c;
+  --color-midnight: #0f2440;
+  --color-gold: #d4a843;
+  --color-gold-light: #e8c96a;
+  --color-gold-dim: #a07c2e;
+  --color-warm-white: #f5f0e8;
+  --color-soft-white: #e8e0d4;
+  --color-crimson: #8b2635;
+  --color-crimson-glow: #c4384a;
+
+  /* Accent Colors */
+  --color-sanctuary-purple: #4a2d6b;
+  --color-exodus-amber: #c47a2a;
+  --color-creation-cyan: #2a8a9e;
+  --color-noah-teal: #1a6b6b;
+  --color-prophecy-silver: #b8c4d0;
+
+  /* Typography */
+  --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Font Sizes — Fluid */
+  --text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+  --text-sm: clamp(0.8rem, 0.75rem + 0.3vw, 0.95rem);
+  --text-base: clamp(0.95rem, 0.85rem + 0.5vw, 1.1rem);
+  --text-lg: clamp(1.1rem, 1rem + 0.6vw, 1.35rem);
+  --text-xl: clamp(1.3rem, 1.1rem + 1vw, 1.8rem);
+  --text-2xl: clamp(1.6rem, 1.3rem + 1.5vw, 2.5rem);
+  --text-3xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  --text-4xl: clamp(2.5rem, 1.8rem + 3.5vw, 5rem);
+  --text-hero: clamp(3rem, 2rem + 5vw, 7rem);
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 5rem;
+  --space-4xl: 8rem;
+
+  /* Layout */
+  --max-width: 1200px;
+  --section-padding: clamp(3rem, 5vw, 8rem);
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-dramatic: cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 800ms;
+  --duration-dramatic: 1200ms;
+
+  /* Z-indices */
+  --z-canvas: 0;
+  --z-content: 10;
+  --z-nav: 100;
+  --z-loader: 1000;
+
+  /* Shadows & Effects */
+  --glow-gold: 0 0 30px rgba(212, 168, 67, 0.3), 0 0 60px rgba(212, 168, 67, 0.15);
+  --glow-crimson: 0 0 30px rgba(139, 38, 53, 0.3), 0 0 60px rgba(139, 38, 53, 0.15);
+  --text-shadow-sacred: 0 2px 20px rgba(212, 168, 67, 0.4), 0 0 40px rgba(212, 168, 67, 0.1);
+  --backdrop-blur: blur(12px);
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-warm-white);
+  background-color: var(--color-void);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--color-warm-white);
+}
+
+h1 { font-size: var(--text-hero); font-weight: 300; }
+h2 { font-size: var(--text-4xl); font-weight: 400; }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+h5 { font-size: var(--text-xl); }
+
+p {
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-soft-white);
+  max-width: 65ch;
+}
+
+/* Scripture styling */
+.scripture {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: var(--text-lg);
+  color: var(--color-gold);
+  line-height: 1.7;
+  max-width: 55ch;
+  text-shadow: var(--text-shadow-sacred);
+}
+
+.scripture-ref {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: var(--color-gold-dim);
+  display: block;
+  margin-top: var(--space-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Chapter number */
+.chapter-number {
+  font-family: var(--font-heading);
+  font-size: var(--text-hero);
+  font-weight: 300;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(212, 168, 67, 0.2);
+  line-height: 1;
+  user-select: none;
+}
+
+/* --- Links & Buttons --- */
+a {
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+a:hover {
+  color: var(--color-gold-light);
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+
+/* --- Utility Classes --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: var(--section-padding) 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Canvas Layer --- */
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-canvas);
+  pointer-events: none;
+}
+
+.canvas-container canvas {
+  pointer-events: all;
+}
+
+/* --- Content Layer --- */
+.content-layer {
+  position: relative;
+  z-index: var(--z-content);
+  pointer-events: none;
+}
+
+.content-layer > * {
+  pointer-events: all;
+}
+
+/* --- Glass Morphism --- */
+.glass {
+  background: rgba(10, 22, 40, 0.6);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid rgba(212, 168, 67, 0.1);
+  border-radius: 12px;
+}
+
+.glass-dark {
+  background: rgba(5, 13, 26, 0.75);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: var(--glow-gold); }
+  50% { box-shadow: 0 0 50px rgba(212, 168, 67, 0.5), 0 0 100px rgba(212, 168, 67, 0.25); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes rotateIn {
+  from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+  to { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-in { animation: fadeIn var(--duration-slow) var(--ease-smooth) forwards; }
+.animate-fade-in-up { animation: fadeInUp var(--duration-slow) var(--ease-smooth) forwards; }
+.animate-float { animation: float 3s var(--ease-smooth) infinite; }
+.animate-pulse { animation: pulse 2s var(--ease-smooth) infinite; }
+.animate-glow { animation: glow 3s var(--ease-smooth) infinite; }
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-royal-blue);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-dim);
+}
+
+/* --- Selection --- */
+::selection {
+  background: rgba(212, 168, 67, 0.3);
+  color: var(--color-warm-white);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

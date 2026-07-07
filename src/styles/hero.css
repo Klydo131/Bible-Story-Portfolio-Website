@@ -1,0 +1,136 @@
+/* ============================================================
+   HERO SECTION STYLES
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-2xl);
+  overflow: hidden;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  animation: fadeInUp 1.2s var(--ease-smooth) 0.5s both;
+  pointer-events: none; /* Let pointer events fall through to the canvas */
+}
+
+.hero__content * {
+  pointer-events: auto; /* Let text elements remain interactive/selectable */
+}
+
+.hero__canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+
+.hero__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+  margin-bottom: var(--space-lg);
+  animation: fadeInDown 0.8s var(--ease-smooth) 0.8s both;
+}
+
+.hero__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-hero);
+  font-weight: 300;
+  color: var(--color-warm-white);
+  margin-bottom: var(--space-lg);
+  text-shadow: var(--text-shadow-sacred);
+  line-height: 1.05;
+}
+
+.hero__title-accent {
+  display: block;
+  color: var(--color-gold);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.hero__subtitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  color: var(--color-soft-white);
+  margin-bottom: var(--space-2xl);
+  opacity: 0.85;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 1s var(--ease-smooth) 1s both;
+}
+
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: var(--space-3xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  animation: fadeIn 1s var(--ease-smooth) 1.5s both;
+}
+
+.hero__scroll-text {
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-dim);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--color-gold-dim), transparent);
+  animation: scrollBounce 2s var(--ease-smooth) infinite;
+}
+
+.hero__scroll-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  animation: pulse 2s var(--ease-smooth) infinite;
+}
+
+/* Decorative gradient overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--color-void), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-xl);
+  }
+
+  .hero__scroll-indicator {
+    bottom: var(--space-2xl);
+  }
+}
