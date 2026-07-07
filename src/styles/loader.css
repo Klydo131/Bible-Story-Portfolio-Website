@@ -28,34 +28,31 @@
   width: 60px;
   height: 60px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.loader__cross {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.loader__cross-v {
+/* Thread-draw line motif — a diagonal scarlet line that draws itself */
+.loader__thread {
   width: 2px;
-  height: 40px;
-  background: var(--color-gold);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: pulse 1.5s var(--ease-smooth) infinite;
+  height: 0;
+  background: linear-gradient(to bottom, var(--color-crimson), var(--color-gold));
+  transform: rotate(-20deg);
+  animation: threadDraw 1.6s var(--ease-smooth) forwards,
+             threadPulse 2s var(--ease-smooth) 1.6s infinite;
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(139, 38, 53, 0.4);
 }
 
-.loader__cross-h {
-  width: 24px;
-  height: 2px;
-  background: var(--color-gold);
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: pulse 1.5s var(--ease-smooth) 0.2s infinite;
+@keyframes threadDraw {
+  from { height: 0; opacity: 0; }
+  to { height: 48px; opacity: 1; }
+}
+
+@keyframes threadPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(139, 38, 53, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 20px rgba(212, 168, 67, 0.5); }
 }
 
 .loader__text {
@@ -81,12 +78,12 @@
   transition: width 0.3s var(--ease-smooth);
 }
 
-/* Radial glow behind the cross */
+/* Radial glow behind the thread */
 .loader__glow {
   position: absolute;
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 168, 67, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(139, 38, 53, 0.08) 0%, transparent 70%);
   animation: pulse 2s var(--ease-smooth) infinite;
 }

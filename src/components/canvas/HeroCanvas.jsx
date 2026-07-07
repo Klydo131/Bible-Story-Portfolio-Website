@@ -1,70 +1,68 @@
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Stars, Sparkles, Float } from '@react-three/drei'
+import { Stars } from '@react-three/drei'
 import * as THREE from 'three'
 
-function FloatingCross() {
-  const groupRef = useRef()
-  const ringRef = useRef()
+/**
+ * ScarletThread — A flowing ribbon/thread that weaves through space.
+ * Represents the thread of redemption running through Scripture.
+ * No literal cross, no sparkle particles. Subtle, evocative, premium.
+ */
+function ScarletThread() {
+  const meshRef = useRef()
+  const materialRef = useRef()
+
+  /* Build the base curve once */
+  const { curve, tubeGeometry } = useMemo(() => {
+    const points = []
+    const segments = 80
+    for (let i = 0; i <= segments; i++) {
+      const t = i / segments
+      const x = Math.sin(t * Math.PI * 2.5) * (0.6 + t * 0.5)
+      const y = (t - 0.5) * 3.2
+      const z = Math.cos(t * Math.PI * 1.8) * 0.4
+      points.push(new THREE.Vector3(x, y, z))
+    }
+    const c = new THREE.CatmullRomCurve3(points)
+    const g = new THREE.TubeGeometry(c, 120, 0.018, 8, false)
+    return { curve: c, tubeGeometry: g }
+  }, [])
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime()
-    
-    // Slow organic rotation + mouse follow parallax
-    if (groupRef.current) {
-      groupRef.current.rotation.y = time * 0.25 + state.pointer.x * 0.4
-      groupRef.current.rotation.x = Math.sin(time * 0.4) * 0.1 - state.pointer.y * 0.3
-      groupRef.current.position.y = Math.sin(time * 1.2) * 0.12
+
+    if (meshRef.current) {
+      /* Gentle organic sway */
+      meshRef.current.rotation.y = Math.sin(time * 0.18) * 0.15 + state.pointer.x * 0.12
+      meshRef.current.rotation.x = Math.sin(time * 0.25) * 0.06 - state.pointer.y * 0.06
+      meshRef.current.position.y = Math.sin(time * 0.4) * 0.08
     }
 
-    if (ringRef.current) {
-      ringRef.current.rotation.z = -time * 0.3
-      ringRef.current.rotation.x = Math.sin(time * 0.6) * 0.2
+    if (materialRef.current) {
+      /* Subtle emissive pulse */
+      materialRef.current.emissiveIntensity = 0.35 + Math.sin(time * 0.8) * 0.15
     }
   })
 
   return (
-    <group ref={groupRef}>
-      {/* Central Cross Pillar */}
-      <mesh>
-        <boxGeometry args={[0.18, 1.4, 0.18]} />
+    <group ref={meshRef}>
+      {/* The scarlet thread itself */}
+      <mesh geometry={tubeGeometry}>
         <meshPhysicalMaterial
-          color="#d4a843"
-          metalness={0.9}
-          roughness={0.15}
-          clearcoat={0.8}
-          emissive="#d4a843"
-          emissiveIntensity={0.1}
-        />
-      </mesh>
-      
-      {/* Cross Bar */}
-      <mesh position={[0, 0.3, 0]}>
-        <boxGeometry args={[0.9, 0.18, 0.18]} />
-        <meshPhysicalMaterial
-          color="#d4a843"
-          metalness={0.9}
-          roughness={0.15}
-          clearcoat={0.8}
-          emissive="#d4a843"
-          emissiveIntensity={0.1}
-        />
-      </mesh>
-
-      {/* Floating Crown of Thorns Ring (abstract geometry) */}
-      <mesh ref={ringRef} position={[0, 0.3, 0.02]} rotation={[Math.PI / 6, 0, 0]}>
-        <torusGeometry args={[0.26, 0.015, 8, 24]} />
-        <meshPhysicalMaterial
-          color="#8b2635"
-          metalness={0.8}
-          roughness={0.2}
+          ref={materialRef}
+          color="#a03030"
           emissive="#8b2635"
-          emissiveIntensity={0.3}
+          emissiveIntensity={0.35}
+          metalness={0.7}
+          roughness={0.25}
+          clearcoat={0.6}
+          clearcoatRoughness={0.3}
         />
       </mesh>
 
-      {/* Floating particles close to the cross */}
-      <Sparkles count={30} scale={1.8} size={4} speed={0.8} color="#e8c96a" />
+      {/* Soft warm glow along the thread path */}
+      <pointLight position={[0, 0.8, 0.5]} intensity={0.6} distance={3} color="#d4a843" />
+      <pointLight position={[0, -0.5, 0.3]} intensity={0.4} distance={2.5} color="#c4384a" />
     </group>
   )
 }
@@ -73,20 +71,17 @@ export default function HeroCanvas() {
   return (
     <div className="hero__canvas-container">
       <Canvas
-        camera={{ position: [0, 0, 4], fov: 45 }}
+        camera={{ position: [0, 0, 4.5], fov: 42 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >
-        <Stars radius={90} depth={40} count={1200} factor={4} saturation={0.5} fade speed={1} />
-        
-        {/* Lights */}
-        <ambientLight intensity={0.15} />
-        <directionalLight position={[5, 5, 5]} intensity={2.5} color="#ffffff" />
-        <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#8b2635" />
-        <pointLight position={[0, 0.3, 1]} intensity={1.5} distance={3} color="#d4a843" />
+        <Stars radius={90} depth={40} count={1500} factor={3.5} saturation={0.3} fade speed={0.6} />
 
-        <Float speed={2.5} rotationIntensity={0.4} floatIntensity={0.2}>
-          <FloatingCross />
-        </Float>
+        {/* Ambient and directional light for depth */}
+        <ambientLight intensity={0.1} />
+        <directionalLight position={[4, 5, 4]} intensity={1.8} color="#f5f0e8" />
+        <directionalLight position={[-3, -2, -3]} intensity={0.3} color="#4a2d6b" />
+
+        <ScarletThread />
       </Canvas>
     </div>
   )

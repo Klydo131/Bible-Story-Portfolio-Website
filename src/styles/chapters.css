@@ -30,7 +30,7 @@
   direction: ltr;
 }
 
-/* Content side */
+/* Content side — scroll-driven visibility with staggered children */
 .chapter__content {
   display: flex;
   flex-direction: column;
@@ -40,6 +40,11 @@
   will-change: opacity, transform;
 }
 
+/* Each direct child of content gets staggered transition */
+.chapter__content > * {
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
 
 .chapter__header {
   display: flex;
@@ -77,6 +82,14 @@
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+.chapter__subtitle-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--color-gold-dim);
+  margin-top: calc(-1 * var(--space-sm));
+}
+
 .chapter__narrative {
   font-size: var(--text-base);
   color: var(--color-soft-white);
@@ -88,6 +101,11 @@
   padding: var(--space-lg);
   border-left: 2px solid var(--color-gold-dim);
   margin: var(--space-md) 0;
+  transition: border-color var(--duration-normal) var(--ease-smooth);
+}
+
+.chapter__scripture-block:hover {
+  border-left-color: var(--color-gold);
 }
 
 .chapter__scripture {
@@ -109,21 +127,33 @@
   text-transform: uppercase;
 }
 
+/* Connection block — thread icon instead of cross */
 .chapter__connection {
   display: flex;
   align-items: flex-start;
   gap: var(--space-md);
   padding: var(--space-lg);
   border-radius: 8px;
-  background: rgba(139, 38, 53, 0.08);
-  border: 1px solid rgba(139, 38, 53, 0.15);
+  background: rgba(139, 38, 53, 0.06);
+  border: 1px solid rgba(139, 38, 53, 0.12);
+  transition: background var(--duration-normal) var(--ease-smooth),
+              border-color var(--duration-normal) var(--ease-smooth);
 }
 
-.chapter__connection-icon {
-  color: var(--color-crimson);
-  font-size: var(--text-xl);
+.chapter__connection:hover {
+  background: rgba(139, 38, 53, 0.1);
+  border-color: rgba(139, 38, 53, 0.2);
+}
+
+/* Thread connector icon — a small diagonal scarlet line */
+.chapter__connection-thread {
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(to bottom, var(--color-crimson), var(--color-gold-dim));
+  transform: rotate(-15deg);
+  border-radius: 1px;
   flex-shrink: 0;
-  line-height: 1;
+  margin-top: 4px;
 }
 
 .chapter__connection-text {

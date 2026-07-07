@@ -13,7 +13,8 @@ export default function Navbar({ scrolled, onLogoClick, activeChapter, onChapter
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <button className="navbar__logo" onClick={onLogoClick} aria-label="Back to top">
-        <span className="navbar__logo-icon">✝</span>
+        {/* Thread mark instead of cross icon */}
+        <span className="navbar__logo-mark" aria-hidden="true" />
         <span className="navbar__logo-text">The Scarlet Thread</span>
       </button>
 

@@ -8,6 +8,9 @@ export default function ChapterSection({
   reverse,
   children
 }) {
+  /* Staggered delays for child elements */
+  const baseDelay = 0
+
   return (
     <section
       className={`chapter ${reverse ? 'chapter--reverse' : ''}`}
@@ -26,21 +29,28 @@ export default function ChapterSection({
             '--section-offset': `${yOffset}px`,
           }}
         >
-          <div className="chapter__header">
+          <div className="chapter__header" style={{ transitionDelay: `${baseDelay}ms` }}>
             <span className="chapter__number">{String(story.chapter).padStart(2, '0')}</span>
             <span className="chapter__label">Chapter {story.chapter}</span>
           </div>
 
-          <h2 className="chapter__title">{story.title}</h2>
-          <p className="chapter__narrative">{story.narrative}</p>
+          <h2 className="chapter__title" style={{ transitionDelay: `${baseDelay + 80}ms` }}>
+            {story.title}
+          </h2>
 
-          <div className="chapter__scripture-block">
+          <p className="chapter__subtitle-text">{story.subtitle}</p>
+
+          <p className="chapter__narrative" style={{ transitionDelay: `${baseDelay + 160}ms` }}>
+            {story.narrative}
+          </p>
+
+          <div className="chapter__scripture-block" style={{ transitionDelay: `${baseDelay + 240}ms` }}>
             <p className="chapter__scripture">{story.scripture}</p>
             <span className="chapter__scripture-ref">{story.scriptureRef}</span>
           </div>
 
-          <div className="chapter__connection">
-            <span className="chapter__connection-icon">✝</span>
+          <div className="chapter__connection" style={{ transitionDelay: `${baseDelay + 320}ms` }}>
+            <span className="chapter__connection-thread" aria-hidden="true" />
             <div>
               <p className="chapter__connection-label">{story.jesusLabel}</p>
               <p className="chapter__connection-text">{story.jesusConnection}</p>

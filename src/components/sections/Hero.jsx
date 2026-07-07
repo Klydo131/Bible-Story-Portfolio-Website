@@ -8,14 +8,14 @@ export default function Hero() {
 
       {/* Hero Foreground Content */}
       <div className="hero__content">
-        <p className="hero__eyebrow">An Interactive Journey Through Scripture</p>
+        <p className="hero__eyebrow">A Portfolio for Adventist World Radio</p>
         <h1 className="hero__title">
           The Scarlet
           <span className="hero__title-accent">Thread</span>
         </h1>
         <p className="hero__subtitle">
-          How every Old Testament story points to Jesus Christ —
-          from Creation to the Cross.
+          Tracing God's plan of redemption through the stories
+          of the Old Testament.
         </p>
       </div>
 

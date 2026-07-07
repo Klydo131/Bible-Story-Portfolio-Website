@@ -21,10 +21,8 @@ export default function Loader({ isLoading }) {
     <div className={`loader ${!isLoading ? 'loader--hidden' : ''}`}>
       <div className="loader__glow" />
       <div className="loader__symbol">
-        <div className="loader__cross">
-          <div className="loader__cross-v" />
-          <div className="loader__cross-h" />
-        </div>
+        {/* Thread-draw line motif instead of a cross */}
+        <div className="loader__thread" />
       </div>
       <p className="loader__text">The Scarlet Thread</p>
       <div className="loader__progress">

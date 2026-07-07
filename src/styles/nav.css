@@ -33,14 +33,21 @@
   color: var(--color-warm-white);
 }
 
-.navbar__logo-icon {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-gold);
-  font-size: 1.2rem;
+/* Thread mark: a small diagonal scarlet line instead of a cross */
+.navbar__logo-mark {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, var(--color-crimson), var(--color-gold-dim));
+  transform: rotate(-20deg);
+  border-radius: 1px;
+  flex-shrink: 0;
+  transition: height var(--duration-normal) var(--ease-smooth),
+              box-shadow var(--duration-normal) var(--ease-smooth);
+}
+
+.navbar__logo:hover .navbar__logo-mark {
+  box-shadow: 0 0 8px rgba(139, 38, 53, 0.5);
+  height: 24px;
 }
 
 .navbar__logo-text {
@@ -59,6 +66,7 @@
 }
 
 .navbar__link {
+  position: relative;
   font-size: var(--text-sm);
   font-weight: 400;
   color: var(--color-soft-white);
@@ -69,14 +77,39 @@
   background: none;
   border: none;
   font-family: var(--font-body);
+  padding-bottom: 4px;
+}
+
+/* Active underline animation */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width var(--duration-normal) var(--ease-smooth),
+              left var(--duration-normal) var(--ease-smooth);
 }
 
 .navbar__link:hover {
   color: var(--color-gold);
 }
 
+.navbar__link:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
 .navbar__link--active {
   color: var(--color-gold);
+}
+
+.navbar__link--active::after {
+  width: 100%;
+  left: 0;
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
 }
 
 /* --- Chapter Side Navigation (Dots) --- */
@@ -122,7 +155,7 @@
   height: 10px;
   border-radius: 50%;
   border: 1.5px solid var(--color-gold-dim);
-  background: var(--color-void); /* Solid back to hide line underneath dot */
+  background: var(--color-void);
   cursor: pointer;
   transition: all var(--duration-normal) var(--ease-smooth);
   position: relative;
@@ -143,13 +176,14 @@
   position: absolute;
   right: calc(100% + 12px);
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(4px);
   white-space: nowrap;
   font-size: var(--text-xs);
   color: var(--color-gold);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--duration-fast) var(--ease-smooth);
+  transition: opacity var(--duration-fast) var(--ease-smooth),
+              transform var(--duration-fast) var(--ease-smooth);
   background: rgba(5, 13, 26, 0.9);
   padding: 4px 10px;
   border-radius: 4px;
@@ -158,6 +192,7 @@
 
 .chapter-nav__dot:hover .chapter-nav__tooltip {
   opacity: 1;
+  transform: translateY(-50%) translateX(0);
 }
 
 /* --- About Section --- */
@@ -221,6 +256,13 @@
   background: rgba(10, 22, 40, 0.5);
   font-size: var(--text-sm);
   color: var(--color-soft-white);
+  transition: border-color var(--duration-normal) var(--ease-smooth),
+              background var(--duration-normal) var(--ease-smooth);
+}
+
+.about__badge:hover {
+  border-color: rgba(212, 168, 67, 0.3);
+  background: rgba(10, 22, 40, 0.7);
 }
 
 .about__badge-icon {
